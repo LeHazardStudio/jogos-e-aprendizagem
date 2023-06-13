@@ -6,46 +6,105 @@ using UnityEngine;
 public class GameControl : MonoBehaviour
 {
     GameObject token;
-    List<GameObject> tokens = new List<GameObject> {};
-    List<int> faceIndexes = new List<int> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    public List<GameObject> tokensLT = new List<GameObject> { };
+    public List<GameObject> tokensJP = new List<GameObject> { };
+
+     List<int> faceIndexesLatin = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+     List<int> faceIndexesJap = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public static System.Random rnd = new System.Random();
-    public int shuffleNum = 0;
+    public int shuffleNumLT = 0;
+    public int shuffleNumJP = 0;
+    public int rc;
     int[] visibleFaces = { -1, -2 };
-    
+
+
     void Start()
     {
-        tokens.Add(token);
-        tokens.Add(token);
-        tokens.Add(token);
-        tokens.Add(token);
-        tokens.Add(token);
-        tokens.Add(token);
-        tokens.Add(token);
-        tokens.Add(token);
-        tokens.Add(token);
-        tokens.Add(token);
-        int originalLength = faceIndexes.Count;
+
+        tokensLT.Add(token);
+        tokensLT.Add(token);
+        tokensLT.Add(token);
+        tokensLT.Add(token);
+        tokensLT.Add(token);
+        tokensLT.Add(token);
+        tokensLT.Add(token);
+        tokensLT.Add(token);
+        tokensLT.Add(token);
+        tokensLT.Add(token);
+        tokensJP.Add(token);
+        tokensJP.Add(token);
+        tokensJP.Add(token);
+        tokensJP.Add(token);
+        tokensJP.Add(token);
+        tokensJP.Add(token);
+        tokensJP.Add(token);
+        tokensJP.Add(token);
+        tokensJP.Add(token);
+        tokensJP.Add(token);
+
+        int originalLengthLatin = faceIndexesLatin.Count;
+        int originalLenghtJap = faceIndexesJap.Count;
         float yPosition = 2.3f;
         float xPosition = -2.2f;
-        for(int i = 0; i < 9; i++)
+        for (int i = 0; i < 19; i++)
         {
-            shuffleNum = rnd.Next(faceIndexes.Count);
+            shuffleNumLT = rnd.Next(faceIndexesLatin.Count);
+            shuffleNumJP = rnd.Next(faceIndexesJap.Count);
+            rc = Random.Range(1,3);
 
             var temp = Instantiate(token, new Vector3(
                 xPosition, yPosition, 0),
                 Quaternion.identity);
-            
-            temp.GetComponent<MainToken>().faceIndex = faceIndexes[shuffleNum];
-            tokens[shuffleNum] = temp;
-            faceIndexes.Remove(faceIndexes[shuffleNum]);
+            if (rc == 1)
+            {
+                if (faceIndexesLatin.Count > 0)
+                {
+                    temp.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[shuffleNumLT];
+                    tokensLT[faceIndexesLatin[shuffleNumLT]] = temp;
+                    faceIndexesLatin.Remove(faceIndexesLatin[shuffleNumLT]);
+                    
+                }
+                else
+                {
+                    temp.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[shuffleNumJP];
+                    tokensJP[faceIndexesJap[shuffleNumJP]] = temp;
+                    faceIndexesJap.Remove(faceIndexesJap[shuffleNumJP]);
+                    
+                }
+                
+            }
+            else if(rc == 2)
+            {
+                if (faceIndexesJap.Count <= 0)
+                {
+                    temp.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[shuffleNumLT];
+                    faceIndexesLatin.Remove(faceIndexesLatin[shuffleNumLT]);
+                    tokensLT[shuffleNumLT] = temp;
+                }
+                else
+                {
+                    temp.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[shuffleNumJP];
+                    faceIndexesJap.Remove(faceIndexesJap[shuffleNumJP]);
+                    tokensJP[shuffleNumJP] = temp;
+
+                }
+            }
             xPosition = xPosition + 4;
-            if(i == 3)
+            if (i == 2 || i == 6 || i == 10 || i == 14)
             {
                 yPosition += -5.3f;
                 xPosition = -6.2f;
             }
         }
-        token.GetComponent<MainToken>().faceIndex = faceIndexes[0];
+        if(faceIndexesLatin.Count > 0)
+        {
+            token.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[0];
+        }
+        else if(faceIndexesJap.Count > 0)
+        {
+            token.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[0];
+        }
+        
     }
 
     public bool TwoCardsUp()
@@ -82,87 +141,27 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    public bool CheckMatch(int index, int indexAnt)
+    public bool CheckMatch()
     {
         bool success = false;
-        if (index == 0 && visibleFaces[0] + visibleFaces[1] == 5)
+        if (visibleFaces[0] == visibleFaces[1])
         {
+            tokensLT[visibleFaces[0]].GetComponent<MainToken>().matched = true;
+            tokensJP[visibleFaces[0]].GetComponent<MainToken>().matched = true;
             visibleFaces[0] = -1;
             visibleFaces[1] = -2;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
             
-            success = true;
-        }
-        if (index == 1 && visibleFaces[0] + visibleFaces[1] == 7)
-        {
-            visibleFaces[0] = -1;
-            visibleFaces[1] = -2;
-            success = true;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
-        }
-        if (index == 2 && visibleFaces[0] + visibleFaces[1] == 9)
-        {
-            visibleFaces[0] = -1;
-            visibleFaces[1] = -2;
-            success = true;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
-        }
-        if (index == 3 && visibleFaces[0] + visibleFaces[1] == 11)
-        {
-            visibleFaces[0] = -1;
-            visibleFaces[1] = -2;
-            success = true;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
-        }
-        if (index == 4 && visibleFaces[0] + visibleFaces[1] == 13)
-        {
-            visibleFaces[0] = -1;
-            visibleFaces[1] = -2;
-            success = true;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
-        }
-        if (index == 5 && visibleFaces[0] - visibleFaces[1] == 5)
-        {
-            visibleFaces[0] = -1;
-            visibleFaces[1] = -2;
-            success = true;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
-        }
-        if (index == 6 && visibleFaces[0] - visibleFaces[1] == 5)
-        {
-            visibleFaces[0] = -1;
-            visibleFaces[1] = -2;
-            success = true;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
-        }
-        if (index == 7 && visibleFaces[0] - visibleFaces[1] == 5)
-        {
-            visibleFaces[0] = -1;
-            visibleFaces[1] = -2;
-            success = true;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
-        }
-        if (index == 8 && visibleFaces[0] - visibleFaces[1] == 5)
-        {
-            visibleFaces[0] = -1;
-            visibleFaces[1] = -2;
-            success = true;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
 
-        }
-        if (index == 9 && visibleFaces[0] - visibleFaces[1] == 5)
-        {
-            visibleFaces[0] = -1;
-            visibleFaces[1] = -2;
             success = true;
-            tokens[indexAnt].GetComponent<MainToken>().matched = true;
         }
        
-
+ 
         return success;
     }
-    private void Awake()
-    {
-        token = GameObject.Find("Token");
-    }
-}
+        
+        private void Awake()
+        {
+            token = GameObject.Find("Token");
+        }
+     }
+

@@ -6,9 +6,12 @@ public class MainToken : MonoBehaviour
 {
     GameObject gameControl;
     SpriteRenderer spriteRenderer;
-    public Sprite[] faces;
+    public Sprite[] facesLatin;
+    public Sprite[] facesJap;
     public Sprite back;
-    public int faceIndex;
+    public int faceIndexLT = -1;
+    public int faceIndexJP = -1;
+
     public bool matched = false;
 
     public void OnMouseDown()
@@ -19,55 +22,35 @@ public class MainToken : MonoBehaviour
             {
                 if (gameControl.GetComponent<GameControl>().TwoCardsUp() == false)
                 {
-                    spriteRenderer.sprite = faces[faceIndex];
-                    gameControl.GetComponent<GameControl>().AddVisibleFace(faceIndex);
-                    if (faceIndex == 0)
+                    if (faceIndexJP != -1)
                     {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex + 5);
+                        spriteRenderer.sprite = facesJap[faceIndexJP];
+                        gameControl.GetComponent<GameControl>().AddVisibleFace(faceIndexJP);
+                        matched = gameControl.GetComponent<GameControl>().CheckMatch();
                     }
-                    if (faceIndex == 1)
+                    else if (faceIndexLT != -1)
                     {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex + 5);
+                        spriteRenderer.sprite = facesLatin[faceIndexLT];
+                        gameControl.GetComponent<GameControl>().AddVisibleFace(faceIndexLT);
+                        matched = gameControl.GetComponent<GameControl>().CheckMatch();
                     }
-                    if (faceIndex == 2)
-                    {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex + 5);
-                    }
-                    if (faceIndex == 3)
-                    {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex + 5);
-                    }
-                    if (faceIndex == 4)
-                    {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex + 5);
-                    }
-                    if (faceIndex == 5)
-                    {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex - 5);
-                    }
-                    if (faceIndex == 6)
-                    {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex - 5);
-                    }
-                    if (faceIndex == 7)
-                    {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex - 5);
-                    }
-                    if (faceIndex == 8)
-                    {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex - 5);
-                    }
-                    if (faceIndex == 9)
-                    {
-                        matched = gameControl.GetComponent<GameControl>().CheckMatch(faceIndex, faceIndex - 5);
-                    }
+                    
 
                 }
             }
             else
             {
-                spriteRenderer.sprite = back;
-                gameControl.GetComponent<GameControl>().RemoveVisibleFace(faceIndex);
+                if (faceIndexJP != -1)
+                {
+                    spriteRenderer.sprite = back;
+                    gameControl.GetComponent<GameControl>().RemoveVisibleFace(faceIndexJP);
+                }
+                else if (faceIndexLT != -1)
+                {
+                    spriteRenderer.sprite = back;
+                    gameControl.GetComponent<GameControl>().RemoveVisibleFace(faceIndexLT);
+                }
+                
             }
         }
         

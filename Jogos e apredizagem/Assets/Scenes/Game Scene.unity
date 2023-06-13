@@ -276,7 +276,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.8617935
+  orthographic size: 16.251997
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -300,7 +300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388486784}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: -3.6, z: -10}
+  m_LocalPosition: {x: 0.6, y: -9.56, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -336,7 +336,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be411f6c43ac48408a1dd419693ad16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shuffleNum: 0
+  tokensLT: []
+  tokensJP: []
+  shuffleNumLT: 0
+  shuffleNumJP: 0
+  rc: 0
 --- !u!4 &964196037
 Transform:
   m_ObjectHideFlags: 0
@@ -383,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1c834aac654e34f8d8833f0a3019ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  faces:
+  facesLatin:
   - {fileID: 21300000, guid: e161d6e7e339612498f3f3fd6f367e7c, type: 3}
   - {fileID: 21300000, guid: c4c85600bc1a13e4a8e37418270583d2, type: 3}
   - {fileID: 21300000, guid: 6544e761373d23a42b2546f0e2e4c332, type: 3}
@@ -394,8 +398,20 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7901d70db26ccf2478b31eb072d7911b, type: 3}
   - {fileID: 21300000, guid: bb027ac6344b7bd45ab75a35e71b4cce, type: 3}
   - {fileID: 21300000, guid: 0bc68b239401e5540913947d8636a5fc, type: 3}
-  back: {fileID: 21300000, guid: 0caeff6eb8a2c38479bbb131bd7dcce1, type: 3}
-  faceIndex: 0
+  facesJap:
+  - {fileID: 198967275, guid: 57ce76943c0fa814cb518a4ff775ae3a, type: 3}
+  - {fileID: -1582502102, guid: 57ce76943c0fa814cb518a4ff775ae3a, type: 3}
+  - {fileID: 247031349, guid: 57ce76943c0fa814cb518a4ff775ae3a, type: 3}
+  - {fileID: 280665055, guid: 57ce76943c0fa814cb518a4ff775ae3a, type: 3}
+  - {fileID: 273658147, guid: 57ce76943c0fa814cb518a4ff775ae3a, type: 3}
+  - {fileID: 1467421839, guid: 8496a479e86930346959a659d08a92b3, type: 3}
+  - {fileID: -1240025827, guid: 8496a479e86930346959a659d08a92b3, type: 3}
+  - {fileID: -1123431105, guid: 8496a479e86930346959a659d08a92b3, type: 3}
+  - {fileID: 386910774, guid: 8496a479e86930346959a659d08a92b3, type: 3}
+  - {fileID: -14913580, guid: 8496a479e86930346959a659d08a92b3, type: 3}
+  back: {fileID: 21300000, guid: 793cd5df8619cfd40a3678a5cb6614b8, type: 3}
+  faceIndexLT: -1
+  faceIndexJP: -1
   matched: 0
 --- !u!212 &1569812062
 SpriteRenderer:
@@ -438,7 +454,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0caeff6eb8a2c38479bbb131bd7dcce1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 793cd5df8619cfd40a3678a5cb6614b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
