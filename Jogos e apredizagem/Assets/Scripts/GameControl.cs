@@ -78,14 +78,16 @@ public class GameControl : MonoBehaviour
                 if (faceIndexesJap.Count <= 0)
                 {
                     temp.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[shuffleNumLT];
+                    tokensLT[faceIndexesJap[shuffleNumLT]] = temp;
                     faceIndexesLatin.Remove(faceIndexesLatin[shuffleNumLT]);
-                    tokensLT[shuffleNumLT] = temp;
+                    
                 }
                 else
                 {
                     temp.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[shuffleNumJP];
+                    tokensJP[faceIndexesJap[shuffleNumJP]] = temp;
                     faceIndexesJap.Remove(faceIndexesJap[shuffleNumJP]);
-                    tokensJP[shuffleNumJP] = temp;
+                    
 
                 }
             }
@@ -96,14 +98,15 @@ public class GameControl : MonoBehaviour
                 xPosition = -6.2f;
             }
         }
-        if(faceIndexesLatin.Count > 0)
+        if (faceIndexesLatin.Count > 0)
         {
             token.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[0];
         }
-        else if(faceIndexesJap.Count > 0)
+        else if (faceIndexesJap.Count > 0) 
         {
             token.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[0];
         }
+        
         
     }
 
@@ -148,6 +151,8 @@ public class GameControl : MonoBehaviour
         {
             tokensLT[visibleFaces[0]].GetComponent<MainToken>().matched = true;
             tokensJP[visibleFaces[0]].GetComponent<MainToken>().matched = true;
+            tokensLT[visibleFaces[0]].GetComponent<MainToken>().faceIndexLT = visibleFaces[0];
+            tokensJP[visibleFaces[0]].GetComponent<MainToken>().faceIndexJP = visibleFaces[0];
             visibleFaces[0] = -1;
             visibleFaces[1] = -2;
             
