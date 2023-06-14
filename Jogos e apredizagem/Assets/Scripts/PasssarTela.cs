@@ -16,4 +16,9 @@ public class PasssarTela : MonoBehaviour
     {
         SceneManager.LoadScene("Game Scene");     
     }
+
+    public void regra()
+    {
+        SceneManager.LoadScene("Regras");
+    }
 }
