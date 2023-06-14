@@ -21,4 +21,9 @@ public class PasssarTela : MonoBehaviour
     {
         SceneManager.LoadScene("Regras");
     }
+
+    public void sair()
+    {
+        Application.Quit();
+    }
 }

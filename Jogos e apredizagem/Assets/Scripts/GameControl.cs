@@ -9,8 +9,8 @@ public class GameControl : MonoBehaviour
     public List<GameObject> tokensLT = new List<GameObject> { };
     public List<GameObject> tokensJP = new List<GameObject> { };
 
-     List<int> faceIndexesLatin = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-     List<int> faceIndexesJap = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    public List<int> faceIndexesLatin = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    public List<int> faceIndexesJap = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public static System.Random rnd = new System.Random();
     public int shuffleNumLT = 0;
     public int shuffleNumJP = 0;
@@ -55,10 +55,12 @@ public class GameControl : MonoBehaviour
             var temp = Instantiate(token, new Vector3(
                 xPosition, yPosition, 0),
                 Quaternion.identity);
+            Debug.Log("Criou");
             if (rc == 1)
             {
                 if (faceIndexesLatin.Count > 0)
                 {
+                    Debug.Log("1");
                     temp.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[shuffleNumLT];
                     tokensLT[faceIndexesLatin[shuffleNumLT]] = temp;
                     faceIndexesLatin.Remove(faceIndexesLatin[shuffleNumLT]);
@@ -66,6 +68,7 @@ public class GameControl : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("2");
                     temp.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[shuffleNumJP];
                     tokensJP[faceIndexesJap[shuffleNumJP]] = temp;
                     faceIndexesJap.Remove(faceIndexesJap[shuffleNumJP]);
@@ -77,13 +80,16 @@ public class GameControl : MonoBehaviour
             {
                 if (faceIndexesJap.Count <= 0)
                 {
+                    Debug.Log("3");
                     temp.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[shuffleNumLT];
-                    tokensLT[faceIndexesJap[shuffleNumLT]] = temp;
+                    tokensLT[faceIndexesLatin[shuffleNumLT]] = temp;
                     faceIndexesLatin.Remove(faceIndexesLatin[shuffleNumLT]);
+                    
                     
                 }
                 else
                 {
+                    Debug.Log("4");
                     temp.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[shuffleNumJP];
                     tokensJP[faceIndexesJap[shuffleNumJP]] = temp;
                     faceIndexesJap.Remove(faceIndexesJap[shuffleNumJP]);
@@ -97,15 +103,16 @@ public class GameControl : MonoBehaviour
                 yPosition += -5.3f;
                 xPosition = -6.2f;
             }
+            if (faceIndexesLatin.Count > 0)
+            {
+                token.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[0];
+            }
+            else if (faceIndexesJap.Count > 0)
+            {
+                token.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[0];
+            }
         }
-        if (faceIndexesLatin.Count > 0)
-        {
-            token.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[0];
-        }
-        else if (faceIndexesJap.Count > 0) 
-        {
-            token.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[0];
-        }
+        
         
         
     }
