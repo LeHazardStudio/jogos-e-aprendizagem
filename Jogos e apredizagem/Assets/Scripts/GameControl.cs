@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameControl : MonoBehaviour
 {
@@ -16,11 +19,16 @@ public class GameControl : MonoBehaviour
     public int shuffleNumJP = 0;
     public int rc;
     int[] visibleFaces = { -1, -2 };
+    public int score = 0;
+
+    Timer timer = new Timer(60);
+    public TMP_Text text;
 
 
     void Start()
     {
-
+        
+      
         tokensLT.Add(token);
         tokensLT.Add(token);
         tokensLT.Add(token);
@@ -162,7 +170,7 @@ public class GameControl : MonoBehaviour
             tokensJP[visibleFaces[0]].GetComponent<MainToken>().faceIndexJP = visibleFaces[0];
             visibleFaces[0] = -1;
             visibleFaces[1] = -2;
-            
+            score = score + 1;
 
             success = true;
         }
@@ -175,5 +183,21 @@ public class GameControl : MonoBehaviour
         {
             token = GameObject.Find("Token");
         }
-     }
+
+    public void Update()
+    {
+        int temporizador = (int)Timer.Tempo;
+        timer.countDown();
+        text.text = "Tempo Restante : " + temporizador.ToString();
+
+        if(score == 10)
+        {
+            SceneManager.LoadScene("Vitoria");
+        }
+        if(timer.getTimer() <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+    }
+}
 
