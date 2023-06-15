@@ -161,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 37, y: -393}
+  m_AnchoredPosition: {x: 0, y: -393}
   m_SizeDelta: {x: 275, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &86368798
@@ -373,8 +373,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 349, y: -100}
-  m_SizeDelta: {x: 1067.6794, y: 261.8087}
+  m_AnchoredPosition: {x: 355, y: -100}
+  m_SizeDelta: {x: 1119, y: 207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397705625
 MonoBehaviour:
@@ -745,8 +745,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -76.6974, y: 275.55}
-  m_SizeDelta: {x: -448.3947, y: 57.111}
+  m_AnchoredPosition: {x: -70.44739, y: 275.55}
+  m_SizeDelta: {x: -460.89478, y: 57.111}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1490570437
 MonoBehaviour:
@@ -1041,7 +1041,7 @@ GameObject:
   - component: {fileID: 2127998989}
   - component: {fileID: 2127998988}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ShibaInu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1065,7 +1065,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -635, y: -161}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 320, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2127998988
 MonoBehaviour:
