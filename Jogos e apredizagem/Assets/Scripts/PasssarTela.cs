@@ -25,6 +25,7 @@ public class PasssarTela : MonoBehaviour
     public void voltar()
     {
         SceneManager.LoadScene("Menu");
+        GameControl.fasespassadas = 0;
     }
 
     public void sair()

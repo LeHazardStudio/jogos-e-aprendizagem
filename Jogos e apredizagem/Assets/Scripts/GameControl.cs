@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 public class GameControl : MonoBehaviour
@@ -21,14 +22,29 @@ public class GameControl : MonoBehaviour
     int[] visibleFaces = { -1, -2 };
     public int score = 0;
 
+    public static int fasespassadas;
+
     Timer timer = new Timer(60);
     public TMP_Text text;
 
 
     void Start()
     {
-        
-      
+
+        if (fasespassadas == 0)
+        {
+            timer = new Timer(60);
+        }
+        if (fasespassadas == 1)
+        {
+            timer = new Timer(45);
+        }
+        if (fasespassadas == 2)
+        {
+            timer = new Timer(30);
+        }
+
+
         tokensLT.Add(token);
         tokensLT.Add(token);
         tokensLT.Add(token);
@@ -58,7 +74,7 @@ public class GameControl : MonoBehaviour
         {
             shuffleNumLT = rnd.Next(faceIndexesLatin.Count);
             shuffleNumJP = rnd.Next(faceIndexesJap.Count);
-            rc = Random.Range(1,3);
+            rc = Random.Range(1, 3);
 
             var temp = Instantiate(token, new Vector3(
                 xPosition, yPosition, 0),
@@ -71,37 +87,41 @@ public class GameControl : MonoBehaviour
                     Debug.Log("1");
                     temp.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[shuffleNumLT];
                     tokensLT[faceIndexesLatin[shuffleNumLT]] = temp;
+                   
                     faceIndexesLatin.Remove(faceIndexesLatin[shuffleNumLT]);
-                    
+
                 }
                 else
                 {
                     Debug.Log("2");
                     temp.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[shuffleNumJP];
                     tokensJP[faceIndexesJap[shuffleNumJP]] = temp;
+                   
                     faceIndexesJap.Remove(faceIndexesJap[shuffleNumJP]);
-                    
+
                 }
-                
+
             }
-            else if(rc == 2)
+            else if (rc == 2)
             {
                 if (faceIndexesJap.Count <= 0)
                 {
                     Debug.Log("3");
                     temp.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[shuffleNumLT];
                     tokensLT[faceIndexesLatin[shuffleNumLT]] = temp;
+                 
                     faceIndexesLatin.Remove(faceIndexesLatin[shuffleNumLT]);
-                    
-                    
+
+
                 }
                 else
                 {
                     Debug.Log("4");
                     temp.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[shuffleNumJP];
                     tokensJP[faceIndexesJap[shuffleNumJP]] = temp;
+                   
                     faceIndexesJap.Remove(faceIndexesJap[shuffleNumJP]);
-                    
+
 
                 }
             }
@@ -114,15 +134,23 @@ public class GameControl : MonoBehaviour
             if (faceIndexesLatin.Count > 0)
             {
                 token.GetComponent<MainToken>().faceIndexLT = faceIndexesLatin[0];
+             
+
             }
             else if (faceIndexesJap.Count > 0)
             {
                 token.GetComponent<MainToken>().faceIndexJP = faceIndexesJap[0];
+                
             }
+
         }
         
         
-        
+
+
+
+
+
     }
 
     public bool TwoCardsUp()
@@ -174,30 +202,37 @@ public class GameControl : MonoBehaviour
 
             success = true;
         }
-       
- 
+
+
         return success;
     }
-        
-        private void Awake()
-        {
-            token = GameObject.Find("Token");
-        }
+
+    private void Awake()
+    {
+        token = GameObject.Find("Token");
+    }
 
     public void Update()
     {
+       
+        
+            
+        
         int temporizador = (int)Timer.Tempo;
         timer.countDown();
         text.text = "Tempo Restante : " + temporizador.ToString();
 
-        if(score == 10)
+        if (score == 10 && fasespassadas < 3)
+        {
+            fasespassadas += 1;
+            SceneManager.LoadScene("Game Scene");
+        }
+        if (timer.getTimer() <= 0 || fasespassadas == 3)
         {
             SceneManager.LoadScene("Vitoria");
         }
-        if(timer.getTimer() <= 0)
-        {
-            SceneManager.LoadScene("GameOver");
-        }
     }
+
+   
 }
 

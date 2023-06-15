@@ -20,15 +20,15 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Timer.Tempo <= 60 && Timer.Tempo >= 41)
+        if (GameControl.fasespassadas == 3)
         {
             image.sprite = star3;
         }
-        else if (Timer.Tempo <= 40 && Timer.Tempo >= 21)
+        else if (GameControl.fasespassadas == 2)
         {
             image.sprite = star2;
         }
-        else if (Timer.Tempo <= 20 && Timer.Tempo >= 1)
+        else if (GameControl.fasespassadas == 1)
         {
             image.sprite = star;
         }
